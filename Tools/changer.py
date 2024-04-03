@@ -13,8 +13,8 @@ import io
 
 def change():
   # Initialize method-wide variables and reset output
-  fpin = getcwd() + "\\Algorithms\\Evolution\\Sound Changer\\Input\\Data"
-  fpout = getcwd() + "\\Algorithms\\Evolution\\Sound Changer\\Output"
+  fpin = getcwd() + "\\Algorithms\\Evolution\\Phonetic-Changer\\Input\\Data"
+  fpout = getcwd() + "\\Algorithms\\Evolution\\Phonetic-Changer\\Output"
 
   for root, dirs, files in walk(fpout):
     for file in files:
@@ -75,14 +75,14 @@ def c_generate(src, dest):
     
 def c_evolve(fileline):
   # Decode change list
-  fpref = getcwd() + "\\Algorithms\\Evolution\\Sound Changer\\Input\\Changes"
+  fpref = getcwd() + "\\Algorithms\\Evolution\\Phonetic-Changer\\Input"
   
-  if not isfile(join(fpref, "List.txt")):
+  if not isfile(join(fpref, "Changelist.txt")):
     print("\nNO CHANGELIST FOUND")
     
     return
   
-  fin = io.open(join(fpref, "List.txt"), "r", encoding = "utf-16")
+  fin = io.open(join(fpref, "Changelist.txt"), "r", encoding = "utf-16")
   
   lines = fin.readlines()
   cstart = lines.index("• List\n") + 1
