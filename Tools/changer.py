@@ -13,8 +13,8 @@ import io
 
 def change():
   # Initialize method-wide variables and reset output
-  fpin = getcwd() + "\\Algorithms\\Evolution\\Phonetic-Changer\\Input\\Data"
-  fpout = getcwd() + "\\Algorithms\\Evolution\\Phonetic-Changer\\Output"
+  fpin = getcwd() + "\\Input\\Data"
+  fpout = getcwd() + "\\\Output"
 
   for root, dirs, files in walk(fpout):
     for file in files:
@@ -75,7 +75,7 @@ def c_generate(src, dest):
     
 def c_evolve(fileline):
   # Decode change list
-  fpref = getcwd() + "\\Algorithms\\Evolution\\Phonetic-Changer\\Input"
+  fpref = getcwd() + "\\Input"
   
   if not isfile(join(fpref, "Changelist.txt")):
     print("\nNO CHANGELIST FOUND")
@@ -86,7 +86,7 @@ def c_evolve(fileline):
   
   lines = fin.readlines()
   cstart = lines.index("• List\n") + 1
-  changes = c_decode(lines[cstart : len(lines) - 1])
+  changes = c_decode(lines[cstart:])
   
   fin.close()
   
@@ -116,6 +116,8 @@ def c_decode(changes):
       continue
     
     specs.append(cstripped.split(" : ")[1])
+
+  decoded[cdef] = specs
     
   return decoded
 
@@ -129,7 +131,6 @@ def c_apply(pstring, changes):
   # Apply each change in the changes dict to the npstring
   for key in changes.keys():
     for change in changes[key]:
-      print(npstring)
       dc = change
       
       dc = dc.replace("→", "$")
@@ -140,9 +141,6 @@ def c_apply(pstring, changes):
       
       before = " , ".join((dc[2], dc[0], dc[3])).replace("∅ , ", "")
       after = " , ".join((dc[2], dc[1], dc[3])).replace("∅ , ", "")
-      
-      print(before)
-      print(after)
       
       npstring = npstring.replace(before, after)
     
